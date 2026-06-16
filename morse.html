@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Mobile Container (450x800) */
+        .phone-container {
+            width: 450px;
+            height: 800px;
+            background-color: #1e1e1e;
+            border: 4px solid #333;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        /* Header */
+        header {
+            background-color: #ff9f43;
+            color: #121212;
+            padding: 15px;
+            text-align: justify;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            background-color: #2d2d2d;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 5px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: #ff9f43;
+            border-bottom: 3px solid #ff9f43;
+            font-weight: bold;
+        }
+
+        /* Content Area */
+        .content-section {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Scrollbar Customization */
+        .content-section::-webkit-scrollbar {
+            width: 6px;
+        }
+        .content-section::-webkit-scrollbar-thumb {
+            background-color: #444;
+            border-radius: 3px;
+        }
+
+        /* Typography & Components */
+        h2 {
+            margin-bottom: 12px;
+            color: #ff9f43;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        /* Morse Table 4 Columns */
+        .morse-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            table-layout: fixed;
+        }
+
+        .morse-table th, .morse-table td {
+            border: 1px solid #333;
+            padding: 8px 4px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .morse-table th {
+            background-color: #2d2d2d;
+            color: #ff9f43;
+        }
+
+        .morse-table tr:nth-child(even) {
+            background-color: #252525;
+        }
+
+        .code {
+            font-family: monospace;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            color: #00d2d3;
+            text-align: left;
+            padding-left: 8px;
+        }
+
+        /* Converter Styles */
+        .conv-group {
+            background-color: #2d2d2d;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .conv-label {
+            font-size: 0.85rem;
+            color: #ff9f43;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .conv-input {
+            width: 100%;
+            background-color: #121212;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 6px;
+            resize: none;
+        }
+
+        .conv-input:focus {
+            outline: none;
+            border-color: #ff9f43;
+        }
+
+        .conv-output {
+            background-color: #222;
+            padding: 12px;
+            border-radius: 6px;
+            height: auto;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #00d2d3;
+            word-break: break-word;
+            margin-top: 8px;
+            border-left: 4px solid #00d2d3;
+        }
+
+        .morse-keyboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .key-btn {
+            background-color: #3d3d3d;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 15px 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .key-btn:active {
+            background-color: #555;
+        }
+
+        .key-btn.clear {
+            grid-column: span 3;
+            font-size: 0.9rem;
+            padding: 8px 0;
+            background-color: #c0392b;
+            border-color: #a93226;
+        }
+
+        /* Game Styles */
+        .level-selection {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .lvl-btn {
+            flex: 1;
+            padding: 8px;
+            background-color: #333;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .lvl-btn.active {
+            background-color: #ff9f43;
+            color: #121212;
+            font-weight: bold;
+            border-color: #ff9f43;
+        }
+
+        .game-card {
+            background-color: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .question-box {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 20px 0;
+            letter-spacing: 1px;
+            color: #00d2d3;
+            min-height: 60px;
+            word-break: break-all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.4;
+            padding: 5px;
+            background-color: #222;
+            border-radius: 6px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .option-btn {
+            background-color: #3d3d3d;
+            color: white;
+            border: 2px solid #555;
+            padding: 12px;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1rem;
+            height: 25px;
+        }
+
+        .correct { color: #1dd1a1; }
+        .wrong { color: #ff6b6b; }
+
+        .reset-btn {
+            margin-top: 20px;
+            background: none;
+            border: 1px solid #ff9f43;
+            color: #ff9f43;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <header><a href="sandi.html"> ◀ </a> MORSE</header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('materi')">Materi</button>
+            <button class="tab-btn" onclick="switchTab('converter')">Alat Terjemah</button>
+            <button class="tab-btn" onclick="switchTab('game')">Kuis Game</button>
+        </div>
+
+        <div id="materi" class="content-section active">
+            <h2>Apa itu Sandi Morse?</h2>
+            <p>Morse adalah sistem komunikasi yang menggunakan kombinasi titik (.) dan garis (-) untuk mewakili huruf, angka, dan tanda baca. Diciptakan pada tahun 1830-an oleh Samuel F.B. Morse dan Alfred Vail, kode ini biasanya dikirim melalui telegraf, radio, kilatan cahaya, atau ketukan peluit.</p>
+            
+            <h2>Kamus Huruf (A-Z)</h2>
+            <table class="morse-table">
+                <tbody id="table-letters"></tbody>
+            </table>
+
+            <h2>Kamus Angka (0-9)</h2>
+            <table class="morse-table">
+                <tbody id="table-numbers"></tbody>
+            </table>
+
+            <h2>Kamus Tanda Baca</h2>
+            <table class="morse-table">
+                <tbody id="table-punctuation"></tbody>
+            </table>
+        </div>
+
+        <div id="converter" class="content-section">
+            <h2>Alat Terjemah Morse</h2>
+            
+            <div class="conv-group">
+                <label class="conv-label">1. KETIK TEKS ➔ JADI MORSE</label>
+                <textarea id="text-to-morse-input" class="conv-input" rows="2" placeholder="Input dengan keyboard" oninput="handleTextToMorse()"></textarea>
+                <div id="text-to-morse-output" class="conv-output">Output</div>
+            </div>
+
+            <div class="conv-group">
+                <label class="conv-label">2. KETUK TOMBOL MORSE ➔ JADI TEKS</label>
+                <div id="morse-buffer-display" class="conv-input" row="2" oninput="translateMorseToText()">Input dengan tombol di bawah</div>
+                <div id="morse-to-text-display" class="conv-output" style="color: #ff9f43; font-weight: bold; min-height: 35px; font-size:1rem;">Output</div>
+                
+                <div class="morse-keyboard">
+                    <button class="key-btn" onclick="pressMorseKey('.')">.</button>
+                    <button class="key-btn" onclick="pressMorseKey('-')">-</button>
+                    <button class="key-btn" onclick="pressMorseKey('/')">/</button>
+                    <button class="key-btn clear" onclick="clearMorseConverter()">Hapus Semua Data</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="game" class="content-section">
+            <div class="level-selection">
+                <button id="btn-lvl-huruf" class="lvl-btn active" onclick="changeLevel('huruf')">Level: Huruf</button>
+                <button id="btn-lvl-kata" class="lvl-btn" onclick="changeLevel('kata')">Level: Kata</button>
+            </div>
+
+            <div class="score-board">
+                <span>Skor: <b id="score">0</b></span>
+                <span>Soal: <b id="question-count">1</b>/10</span>
+            </div>
+            
+            <div class="game-card">
+                <p id="game-instruction">Tebak huruf dari kode morse berikut:</p>
+                <div class="question-box" id="question">-</div>
+                <div class="options-container" id="options"></div>
+                <div class="feedback" id="feedback"></div>
+                <button class="reset-btn" onclick="resetGame()">Ulangi Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Database Kode Morse Master
+        const morseLetters = {
+            'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 
+            'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 
+            'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 
+            'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 
+            'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..'
+        };
+
+        const morseNumbers = {
+            '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....',
+            '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----'
+        };
+
+        const morsePunctuation = {
+            '.': '.-.-.-', ',': '--..--', '?': '..--..', '/': '-..-.', '-': '-....-',
+            '(': '-.--.', ')': '-.--.-', '@': '.--.-.', '=': '-...-', '!': '-.-.--'
+        };
+
+        // Gabungkan seluruh database untuk keperluan dekoder balik (Morse -> Teks)
+        const fullMorseDatabase = { ...morseLetters, ...morseNumbers, ...morsePunctuation };
+        
+        // Buat mapping terbalik: {'.-': 'A', '-...': 'B', dst}
+        const reverseMorseDatabase = {};
+        for (let key in fullMorseDatabase) {
+            reverseMorseDatabase[fullMorseDatabase[key]] = key;
+        }
+
+        const wordBank = ["PRAMUKA", "SANDI", "MORSE", "RADIO", "KODE", "TUNAS", "BUKIT", "KEMAH", "SINYAL", "PINTAR", "CEPAT", "LOGIKA"];
+
+        // Render Kamus 4 Kolom
+        function renderFourColumnTable(data, tableId) {
+            const tbody = document.getElementById(tableId);
+            const keys = Object.keys(data);
+            let htmlResult = '';
+            for (let i = 0; i < keys.length; i += 2) {
+                let char1 = keys[i]; let code1 = data[char1];
+                let char2 = keys[i+1] ? keys[i+1] : '';
+                let code2 = keys[i+1] ? data[char2] : '';
+                htmlResult += `<tr><td style="width:15%"><b>${char1}</b></td><td class="code" style="width:35%">${code1}</td><td style="width:15%"><b>${char2}</b></td><td class="code" style="width:35%">${code2}</td></tr>`;
+            }
+            tbody.innerHTML = htmlResult;
+        }
+        renderFourColumnTable(morseLetters, 'table-letters');
+        renderFourColumnTable(morseNumbers, 'table-numbers');
+        renderFourColumnTable(morsePunctuation, 'table-punctuation');
+
+        // Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            if(tabId === 'game' && currentQuestionIndex === 0) {
+                nextQuestion();
+            }
+        }
+
+        /* ---------------- INTERATIVE CONVERTER LOGIC ---------------- */
+        
+        // 1. Logika Teks -> Morse
+        function handleTextToMorse() {
+            const inputText = document.getElementById('text-to-morse-input').value;
+            const outputBox = document.getElementById('text-to-morse-output');
+            
+            if (!inputText.trim()) {
+                outputBox.innerText = "Output";
+                return;
+            }
+
+            let result = inputText.toUpperCase().split('').map(char => {
+                if (char === ' ') return ' // '; // Pemisah spasi kata
+                return fullMorseDatabase[char] || '?'; // Ambil kode atau tanda tanya jika tidak ada
+            }).join('/');
+
+            // Merapikan tumpukan garis miring berlebih jika user tidak sengaja double spasi
+            result = result.replace(/\/ \//g, '/').replace(/\s+/g, ' ');
+            outputBox.innerText = result;
+        }
+
+        // 2. Logika Tombol Layar Morse -> Teks
+        let currentMorseInputString = "";
+
+        function pressMorseKey(char) {
+            currentMorseInputString += char;
+            document.getElementById('morse-buffer-display').innerText = currentMorseInputString;
+            translateMorseToText();
+        }
+
+        function translateMorseToText() {
+            const displayBox = document.getElementById('morse-to-text-display');
+            
+            if (!currentMorseInputString.trim()) {
+                displayBox.innerText = "[Hasil teks di sini]";
+                return;
+            }
+
+            // Pisahkan input berdasarkan tanda "/" untuk mendeteksi setiap huruf
+            let lettersArray = currentMorseInputString.split('/');
+            
+            let decodedText = lettersArray.map(morseCode => {
+                let trimmedCode = morseCode.trim();
+                if (trimmedCode === "") return " "; // jika spasi kosong, kembalikan spasi kalimat
+                return reverseMorseDatabase[trimmedCode] || '_'; // Jika kode belum lengkap tampilkan underscore (_)
+            }).join('');
+
+            displayBox.innerText = decodedText;
+        }
+
+        function clearMorseConverter() {
+            currentMorseInputString = "";
+            document.getElementById('text-to-morse-input').value = "";
+            document.getElementById('text-to-morse-output').innerText = "Output";
+            document.getElementById('morse-buffer-display').innerText = "Input dengan tombol di bawah";
+            document.getElementById('morse-to-text-display').innerText = "Output";
+        }
+
+
+        /* ---------------- GAME QUIZ LOGIC ---------------- */
+        let currentLevel = 'huruf';
+        let score = 0;
+        let currentQuestionIndex = 0;
+        let correctAnswer = '';
+        const totalQuestions = 10;
+
+        function changeLevel(level) {
+            currentLevel = level;
+            document.getElementById('btn-lvl-huruf').classList.toggle('active', level === 'huruf');
+            document.getElementById('btn-lvl-kata').classList.toggle('active', level === 'kata');
+            resetGame();
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex >= totalQuestions) {
+                document.getElementById('question').innerText = "Selesai!";
+                document.getElementById('game-instruction').innerText = `Permainan Berakhir.`;
+                document.getElementById('options').innerHTML = '';
+                document.getElementById('feedback').className = "feedback correct";
+                document.getElementById('feedback').innerText = `Skor akhir kamu: ${score}`;
+                return;
+            }
+
+            currentQuestionIndex++;
+            document.getElementById('question-count').innerText = currentQuestionIndex;
+            document.getElementById('feedback').innerText = '';
+
+            let options = [];
+            let questionDisplay = '';
+
+            if (currentLevel === 'huruf') {
+                document.getElementById('game-instruction').innerText = "Tebak HURUF dari kode morse berikut:";
+                const letters = Object.keys(morseLetters);
+                correctAnswer = letters[Math.floor(Math.random() * letters.length)];
+                questionDisplay = morseLetters[correctAnswer];
+                
+                options = [correctAnswer];
+                while (options.length < 4) {
+                    let rand = letters[Math.floor(Math.random() * letters.length)];
+                    if (!options.includes(rand)) options.push(rand);
+                }
+            } else {
+                document.getElementById('game-instruction').innerText = "Tebak KATA dari kode morse berikut:";
+                correctAnswer = wordBank[Math.floor(Math.random() * wordBank.length)];
+                questionDisplay = correctAnswer.split('').map(char => morseLetters[char] || '').join(' / ');
+                
+                options = [correctAnswer];
+                while (options.length < 4) {
+                    let rand = wordBank[Math.floor(Math.random() * wordBank.length)];
+                    if (!options.includes(rand)) options.push(rand);
+                }
+            }
+
+            document.getElementById('question').innerText = questionDisplay;
+            
+            if(questionDisplay.length > 20) {
+                document.getElementById('question').style.fontSize = '0.95rem';
+            } else if (questionDisplay.length > 12) {
+                document.getElementById('question').style.fontSize = '1.2rem';
+            } else {
+                document.getElementById('question').style.fontSize = '1.5rem';
+            }
+
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected) {
+            const feedback = document.getElementById('feedback');
+            document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+
+            if (selected === correctAnswer) {
+                score += 10;
+                document.getElementById('score').innerText = score;
+                feedback.innerText = "Benar! 🎉";
+                feedback.className = "feedback correct";
+            } else {
+                feedback.innerText = `Salah! Jawaban: ${correctAnswer}`;
+                feedback.className = "feedback wrong";
+            }
+
+            setTimeout(() => {
+                nextQuestion();
+            }, 1600);
+        }
+
+        function resetGame() {
+            score = 0;
+            currentQuestionIndex = 0;
+            document.getElementById('score').innerText = score;
+            nextQuestion();
+        }
+    </script>
+</body>
+</html>
