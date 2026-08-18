@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandi AN</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Mobile Container (450x800) */
+        .phone-container {
+            width: 450px;
+            height: 800px;
+            background-color: #1e1e1e;
+            border: 4px solid #333;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        /* Header */
+        header {
+            background-color: #ff9f43;
+            color: #121212;
+            padding: 15px;
+            text-align: justify;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        header a {
+            text-decoration: none;
+            color: #121212;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            background-color: #2d2d2d;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 5px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: #ff9f43;
+            border-bottom: 3px solid #ff9f43;
+            font-weight: bold;
+        }
+
+        /* Content Area */
+        .content-section {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Scrollbar Customization */
+        .content-section::-webkit-scrollbar {
+            width: 6px;
+        }
+        .content-section::-webkit-scrollbar-thumb {
+            background-color: #444;
+            border-radius: 3px;
+        }
+
+        /* Typography & Components */
+        h2 {
+            margin-bottom: 12px;
+            color: #ff9f43;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        /* Table Styles */
+        .an-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            table-layout: fixed;
+        }
+
+        .an-table th, .an-table td {
+            border: 1px solid #333;
+            padding: 8px 4px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .an-table th {
+            background-color: #2d2d2d;
+            color: #ff9f43;
+        }
+
+        .an-table tr:nth-child(even) {
+            background-color: #252525;
+        }
+
+        .code {
+            font-family: monospace;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #00d2d3;
+        }
+
+        /* Converter Styles */
+        .conv-group {
+            background-color: #2d2d2d;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .conv-label {
+            font-size: 0.85rem;
+            color: #ff9f43;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .conv-input {
+            width: 100%;
+            background-color: #121212;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 6px;
+            resize: none;
+        }
+
+        .conv-input:focus {
+            outline: none;
+            border-color: #ff9f43;
+        }
+
+        .conv-output {
+            background-color: #222;
+            padding: 12px;
+            border-radius: 6px;
+            height: auto;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #00d2d3;
+            word-break: break-word;
+            margin-top: 8px;
+            border-left: 4px solid #00d2d3;
+        }
+
+        /* Game Styles */
+        .level-selection {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .lvl-btn {
+            flex: 1;
+            padding: 8px;
+            background-color: #333;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .lvl-btn.active {
+            background-color: #ff9f43;
+            color: #121212;
+            font-weight: bold;
+            border-color: #ff9f43;
+        }
+
+        .game-card {
+            background-color: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .question-box {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            letter-spacing: 2px;
+            color: #00d2d3;
+            min-height: 60px;
+            word-break: break-all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.4;
+            padding: 5px;
+            background-color: #222;
+            border-radius: 6px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .option-btn {
+            background-color: #3d3d3d;
+            color: white;
+            border: 2px solid #555;
+            padding: 12px;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1rem;
+            height: 25px;
+        }
+
+        .correct { color: #1dd1a1; }
+        .wrong { color: #ff6b6b; }
+
+        .reset-btn {
+            margin-top: 20px;
+            background: none;
+            border: 1px solid #ff9f43;
+            color: #ff9f43;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <header><a href="index.html"> ◀ </a> SANDI AN</header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('materi')">Materi</button>
+            <button class="tab-btn" onclick="switchTab('converter')">Alat Terjemah</button>
+            <button class="tab-btn" onclick="switchTab('game')">Kuis Game</button>
+        </div>
+
+        <div id="materi" class="content-section active">
+            <h2>Apa itu Sandi AN?</h2>
+            <p>Sandi A-N (atau Sandi AN) adalah sandi pengganti (substitusi) yang membagi 26 alfabet menjadi dua baris sejajar (masing-masing 13 huruf). Huruf <b>A</b> dipasangkan dengan <b>N</b>, <b>B</b> dengan <b>O</b>, dan seterusnya.</p>
+            
+            <h2>Kunci Pasangan Huruf</h2>
+            <table class="an-table">
+                <thead>
+                    <tr>
+                        <th>Baris 1</th>
+                        <th>Baris 2</th>
+                    </tr>
+                </thead>
+                <tbody id="table-an-keys"></tbody>
+            </table>
+        </div>
+
+        <div id="converter" class="content-section">
+            <h2>Alat Terjemah Sandi AN</h2>
+            
+            <div class="conv-group">
+                <label class="conv-label">Ketik Teks / Sandi AN di sini:</label>
+                <textarea id="an-input" class="conv-input" rows="4" placeholder="Ketik kalimat atau kode sandi AN..." oninput="handleAnTranslate()"></textarea>
+                
+                <label class="conv-label" style="margin-top: 15px;">Hasil Terjemahan:</label>
+                <div id="an-output" class="conv-output">Output</div>
+            </div>
+        </div>
+
+        <div id="game" class="content-section">
+            <div class="level-selection">
+                <button id="btn-lvl-huruf" class="lvl-btn active" onclick="changeLevel('huruf')">Level: Huruf</button>
+                <button id="btn-lvl-kata" class="lvl-btn" onclick="changeLevel('kata')">Level: Kata</button>
+            </div>
+
+            <div class="score-board">
+                <span>Skor: <b id="score">0</b></span>
+                <span>Soal: <b id="question-count">1</b>/10</span>
+            </div>
+            
+            <div class="game-card">
+                <p id="game-instruction">Tebak huruf asli dari kode sandi AN berikut:</p>
+                <div class="question-box" id="question">N</div>
+                <div class="options-container" id="options"></div>
+                <div class="feedback" id="feedback"></div>
+                <button class="reset-btn" onclick="resetGame()">Ulangi Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Database Pasangan Sandi AN
+        const anMap = {
+            'A': 'N', 'B': 'O', 'C': 'P', 'D': 'Q', 'E': 'R', 'F': 'S', 'G': 'T',
+            'H': 'U', 'I': 'V', 'J': 'W', 'K': 'X', 'L': 'Y', 'M': 'Z',
+            'N': 'A', 'O': 'B', 'P': 'C', 'Q': 'D', 'R': 'E', 'S': 'F', 'T': 'G',
+            'U': 'H', 'V': 'I', 'W': 'J', 'X': 'K', 'Y': 'L', 'Z': 'M'
+        };
+
+        const wordBank = ["PRAMUKA", "SANDI", "TUNAS", "BUKIT", "KEMAH", "SINYAL", "PINTAR", "CEPAT", "LOGIKA", "REGU", "SIAGA", "PENGGALANG"];
+
+        // Render Tabel Pasangan Kunci AN
+        function renderAnTable() {
+            const tbody = document.getElementById('table-an-keys');
+            let htmlResult = '';
+            const keys = ['A','B','C','D','E','F','G','H','I','J','K','L','M'];
+            
+            keys.forEach(char => {
+                htmlResult += `<tr><td><b>${char}</b></td><td class="code">${anMap[char]}</td></tr>`;
+            });
+            tbody.innerHTML = htmlResult;
+        }
+        renderAnTable();
+
+        // Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            if(tabId === 'game' && currentQuestionIndex === 0) {
+                nextQuestion();
+            }
+        }
+
+        /* ---------------- INTERACTIVE CONVERTER LOGIC ---------------- */
+        function convertAN(text) {
+            return text.toUpperCase().split('').map(char => {
+                return anMap[char] || char; // Mengubah huruf sesuai kamus, mengabaikan angka/simbol/spasi
+            }).join('');
+        }
+
+        function handleAnTranslate() {
+            const inputText = document.getElementById('an-input').value;
+            const outputBox = document.getElementById('an-output');
+            
+            if (!inputText.trim()) {
+                outputBox.innerText = "Output";
+                return;
+            }
+
+            outputBox.innerText = convertAN(inputText);
+        }
+
+        /* ---------------- GAME QUIZ LOGIC ---------------- */
+        let currentLevel = 'huruf';
+        let score = 0;
+        let currentQuestionIndex = 0;
+        let correctAnswer = '';
+        const totalQuestions = 10;
+
+        function changeLevel(level) {
+            currentLevel = level;
+            document.getElementById('btn-lvl-huruf').classList.toggle('active', level === 'huruf');
+            document.getElementById('btn-lvl-kata').classList.toggle('active', level === 'kata');
+            resetGame();
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex >= totalQuestions) {
+                document.getElementById('question').innerText = "Selesai!";
+                document.getElementById('game-instruction').innerText = `Permainan Berakhir.`;
+                document.getElementById('options').innerHTML = '';
+                document.getElementById('feedback').className = "feedback correct";
+                document.getElementById('feedback').innerText = `Skor akhir kamu: ${score}`;
+                return;
+            }
+
+            currentQuestionIndex++;
+            document.getElementById('question-count').innerText = currentQuestionIndex;
+            document.getElementById('feedback').innerText = '';
+
+            let options = [];
+            let questionDisplay = '';
+
+            if (currentLevel === 'huruf') {
+                document.getElementById('game-instruction').innerText = "Tebak HURUF ASLI dari kode Sandi AN berikut:";
+                const letters = Object.keys(anMap);
+                correctAnswer = letters[Math.floor(Math.random() * letters.length)];
+                questionDisplay = anMap[correctAnswer]; // Tampilkan kode AN nya
+                
+                options = [correctAnswer];
+                while (options.length < 4) {
+                    let rand = letters[Math.floor(Math.random() * letters.length)];
+                    if (!options.includes(rand)) options.push(rand);
+                }
+            } else {
+                document.getElementById('game-instruction').innerText = "Tebak KATA ASLI dari kode Sandi AN berikut:";
+                correctAnswer = wordBank[Math.floor(Math.random() * wordBank.length)];
+                questionDisplay = convertAN(correctAnswer); // Enkripsi kata asli ke Sandi AN
+                
+                options = [correctAnswer];
+                while (options.length < 4) {
+                    let rand = wordBank[Math.floor(Math.random() * wordBank.length)];
+                    if (!options.includes(rand)) options.push(rand);
+                }
+            }
+
+            document.getElementById('question').innerText = questionDisplay;
+            
+            if(questionDisplay.length > 20) {
+                document.getElementById('question').style.fontSize = '0.95rem';
+            } else if (questionDisplay.length > 12) {
+                document.getElementById('question').style.fontSize = '1.2rem';
+            } else {
+                document.getElementById('question').style.fontSize = '1.5rem';
+            }
+
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected) {
+            const feedback = document.getElementById('feedback');
+            document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+
+            if (selected === correctAnswer) {
+                score += 10;
+                document.getElementById('score').innerText = score;
+                feedback.innerText = "Benar! 🎉";
+                feedback.className = "feedback correct";
+            } else {
+                feedback.innerText = `Salah! Jawaban: ${correctAnswer}`;
+                feedback.className = "feedback wrong";
+            }
+
+            setTimeout(() => {
+                nextQuestion();
+            }, 1600);
+        }
+
+        function resetGame() {
+            score = 0;
+            currentQuestionIndex = 0;
+            document.getElementById('score').innerText = score;
+            nextQuestion();
+        }
+
+        (function() {
+            window.addEventListener('contextmenu', e => { e.preventDefault(); e.stopPropagation(); }, true);
+            window.addEventListener('keydown', function(e) {
+                if (e.key === 'F12') { e.preventDefault(); e.stopPropagation(); }
+                if (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) { e.preventDefault(); e.stopPropagation(); }
+                if (e.ctrlKey && ['U', 'S', 'A', 'C'].includes(e.key.toUpperCase())) { e.preventDefault(); e.stopPropagation(); }
+            }, true);
+        })();
+    </script>
+
+</body>
+</html>
