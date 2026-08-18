@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petualangan Sandi Pramuka - Beranda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
     <style>
         /* Reset & Base Styles */
         * {
@@ -20,241 +21,231 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 15px;
         }
 
-        /* Mobile Container (Game Console Vibe) */
-        .phone-container {
-            width: 450px;
-            height: 800px;
-            background: radial-gradient(circle, rgb(255, 207, 135), brown);
-            border: 6px solid #f1c40f;
-            border-radius: 30px;
+        /* Responsive Main Container */
+        .game-card {
+            width: 100%;
+            max-width: 460px;
+            height: 92vh;
+            max-height: 750px;
+            background: radial-gradient(circle, #ffcf87, #8b0000);
+            border: 5px solid #f1c40f;
+            border-radius: 25px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             position: relative;
             box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,0,0,0.4);
         }
 
-        /* Game Header / Banner */
+        /* Integrated Header */
         .game-header {
-            background: linear-gradient(to bottom, red, darkred);
-            padding: 35px 20px 25px 20px;
+            background: linear-gradient(to bottom, #d63031, #8b0000);
+            padding: 15px 15px 10px 15px;
             text-align: center;
-            border: none;
-            border-radius: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .game-badge {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            line-height: 1;
+            margin-bottom: 4px;
             display: inline-block;
             animation: floatAnimation 2.5s infinite ease-in-out;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
         }
 
         .game-header h1 {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 900;
-            color: yellow;
+            color: #f1c40f;
             letter-spacing: 1px;
-            text-shadow: 2px 2px 0px #c0392b, 5px 5px 0px rgba(0,0,0,0.2);
+            text-shadow: 2px 2px 0px #c0392b, 3px 3px 0px rgba(0,0,0,0.2);
         }
 
         .game-header p {
-            font-size: 0.9rem;
-            color: white;
-            margin-top: 4px;
+            font-size: 0.75rem;
+            color: #ffffff;
+            margin-top: 2px;
             font-weight: normal;
             letter-spacing: 0.5px;
         }
 
-        /* Zona Peta Petualangan (Main Content) */
-        .game-map {
+        /* Combined Content Area (No Scrollbar) */
+        .game-body {
             flex: 1;
-            overflow-y: auto;
-            padding: 25px;
+            padding: 12px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 25px;
-        }
-
-        .game-map::-webkit-scrollbar {
-            display: none; /* Sembunyikan scrollbar agar bersih seperti game asli */
+            gap: 10px;
+            overflow: hidden; /* Mencegah munculnya scrollbar */
         }
 
         .map-title {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             color: #fff;
             background: #2ed573;
-            padding: 6px 20px;
-            border-radius: 20px;
+            padding: 4px 16px;
+            border-radius: 15px;
             font-weight: bold;
-            border: 3px solid #26af5f;
-            box-shadow: 0 4px 0 #1b7a42;
+            border: 2px solid #26af5f;
+            box-shadow: 0 3px 0 #1b7a42;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
-        /* Level / Menu Card Layout (Gaya Tombol Game 3D) */
-        .level-node {
+        /* Menu Grid (2 Kolom Ringkas) */
+        .menu-grid {
             width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        /* Level / Menu Card Layout */
+        .level-node {
             display: flex;
             align-items: center;
             text-decoration: none;
-            padding: 15px 20px;
-            border-radius: 20px;
-            position: relative;
-            transition: all 0.1s ease;
-            box-shadow: 0 8px 0 rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 14px;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
         }
 
-        /* Warna Khusus Level Morse (Kuning Oranye) */
+        /* Variasi Warna Menu */
         .node-morse {
             background: linear-gradient(to bottom, #ff9f43, #ee5253);
-            border: 4px solid #ff6b6b;
-            box-shadow: 0 8px 0 #b71c1c, 0 12px 15px rgba(0,0,0,0.4);
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 5px 0 #b71c1c, 0 6px 10px rgba(0,0,0,0.3);
         }
 
-        /* Warna Khusus Level Semaphore (Hijau Biru) */
         .node-semaphore {
             background: linear-gradient(to bottom, #1dd1a1, #10ac84);
-            border: 4px solid #10ac84;
-            box-shadow: 0 8px 0 #064e3b, 0 12px 15px rgba(0,0,0,0.4);
+            border: 3px solid #10ac84;
+            box-shadow: 0 5px 0 #064e3b, 0 6px 10px rgba(0,0,0,0.3);
         }
 
-        /* Efek Tekan Tombol 3D Mendalam */
+        .node-sandi-an {
+            background: linear-gradient(to bottom, #6c5ce7, #341f97);
+            border: 3px solid #5f27cd;
+            box-shadow: 0 5px 0 #1b1464, 0 6px 10px rgba(0,0,0,0.3);
+        }
+
+        .node-sandi-kotak {
+            background: linear-gradient(to bottom, #e056fd, #be2edd);
+            border: 3px solid #e056fd;
+            box-shadow: 0 5px 0 #6d214f, 0 6px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Efek Tekan Tombol 3D */
         .level-node:active {
-            transform: translateY(6px);
-            box-shadow: 0 2px 0 rgba(0,0,0,0.3), 0 4px 6px rgba(0,0,0,0.4);
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.3);
         }
 
-        /* Karakter Avatar Bulat di Kiri */
+        /* Karakter Avatar Bulat Ringkas */
         .char-avatar {
-            width: 65px;
-            height: 65px;
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
             border-radius: 50%;
             background-color: #fff;
+            color: #2c3e50;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
-            margin-right: 15px;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        .node-info {
-            flex: 1;
+            font-size: 1.1rem;
+            font-weight: 900;
+            margin-right: 8px;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 0 rgba(0,0,0,0.2);
         }
 
         .node-info h3 {
-            font-size: 1.3rem;
+            font-size: 0.85rem;
             color: #ffffff;
             font-weight: 900;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.4);
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.4);
             letter-spacing: 0.5px;
+            line-height: 1.1;
         }
 
-        .node-info p {
-            font-size: 0.8rem;
-            color: #fff;
-            font-weight: 600;
-            opacity: 0.9;
-            margin-top: 2px;
-            line-height: 1.3;
-        }
-
-        /* Tanda Panah Main/Play */
-        .play-tag {
-            font-size: 1.5rem;
-            background-color: #fff;
-            color: #e67e22;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
-            border: 2px solid #fff;
-        }
-        
-        .node-semaphore .play-tag {
-            color: #10ac84;
-        }
-
-        /* Papan Misi / Info Box Bawah */
-        .mission-board {
+        /* Integrated Game Footer */
+        .game-footer {
             background-color: #f1c40f;
-            border-radius: 15px;
-            padding: 12px 20px;
-            border: 4px solid #db1d1d;
-            border-image: linear-gradient(to right, #f39c12, #d35400) 4;
-            box-shadow: 0 6px 0 rgba(0,0,0,0.2);
+            padding: 8px 15px;
+            border-top: 3px solid #d35400;
             text-align: center;
-            width: 100%;
-            margin-top: 10px;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.4);
         }
 
-        .mission-board p {
-            font-size: 0.85rem;
+        .game-footer p {
+            font-size: 0.75rem;
             color: #2c3e50;
             font-weight: bold;
         }
 
-        /* Animasi Karakter Mengapung */
+        /* Animasi Mengapung Badge */
         @keyframes floatAnimation {
             0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(3deg); }
+            50% { transform: translateY(-5px) rotate(3deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="phone-container">
+    <div class="game-card">
+        <!-- Game Header -->
         <div class="game-header">
             <div class="game-badge">⚜️</div>
             <h1>SANDI PRAMUKA</h1>
             <p>⚔️ Materi, Alat Ubah dan Latihan ⚔️</p>
         </div>
         
-        <div class="game-map">
+        <!-- Game Main Body / Menu Area -->
+        <div class="game-body">
             <div class="map-title">Pilih Sandi</div>
             
-            <a href="morse.html" class="level-node node-morse">
-                <div class="char-avatar">1</div>
-                <div class="node-info">
-                    <h3>MORSE</h3>
-                </div>
-            </a>
+            <div class="menu-grid">
+                <a href="morse.html" class="level-node node-morse">
+                    <div class="char-avatar">1</div>
+                    <div class="node-info">
+                        <h3>MORSE</h3>
+                    </div>
+                </a>
 
-            <a href="semaphore.html" class="level-node node-semaphore">
-                <div class="char-avatar">2</div>
-                <div class="node-info">
-                    <h3>SEMAPHORE</h3>
-                </div>
-            </a>
-           <a href="sandi_an.html" class="level-node" style="background: linear-gradient(to bottom, #6c5ce7, #341f97); border: 4px solid #341f97; box-shadow: 0 8px 0 #1b1464, 0 12px 15px rgba(0,0,0,0.4);">
-                <div class="char-avatar">3</div>
-                <div class="node-info">
-                    <h3>Sandi AN</h3>
-                </div>
-            </a>
-           <a href="sandi_kotak_1.html" class="level-node" style="background: linear-gradient(to bottom, #6c5ce7, #341f97); border: 4px solid #341f97; box-shadow: 0 8px 0 #1b1464, 0 12px 15px rgba(0,0,0,0.4);">
-                <div class="char-avatar">3</div>
-                <div class="node-info">
-                    <h3>Sandi Kotak 1</h3>
-                </div>
-            </a>
-            <div class="mission-board">
-                <p>@2026 Sandi Pramuka by O'Cre Studio</p>
+                <a href="semaphore.html" class="level-node node-semaphore">
+                    <div class="char-avatar">2</div>
+                    <div class="node-info">
+                        <h3>SEMAPHORE</h3>
+                    </div>
+                </a>
+
+                <a href="sandi_an.html" class="level-node node-sandi-an">
+                    <div class="char-avatar">3</div>
+                    <div class="node-info">
+                        <h3>SANDI AN</h3>
+                    </div>
+                </a>
+
+                <a href="sandi_kotak_1.html" class="level-node node-sandi-kotak">
+                    <div class="char-avatar">4</div>
+                    <div class="node-info">
+                        <h3>SANDI KOTAK 1</h3>
+                    </div>
+                </a>
             </div>
+        </div>
+
+        <!-- Game Footer -->
+        <div class="game-footer">
+            <p>@2026 Sandi Pramuka by O'Cre Studio</p>
         </div>
     </div>
     <script>
