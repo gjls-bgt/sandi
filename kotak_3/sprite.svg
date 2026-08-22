@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="30mm"
+   height="30mm"
+   viewBox="0 0 30 30"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="sprite.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.3479492"
+     inkscape:cx="86.671381"
+     inkscape:cy="26.406023"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Lapis 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="miring"
+       style="fill:#000080;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 29.249894 5.0002116 L 0 24.499797 L 0 25.000024 L 0.74982503 25.000024 L 30.000236 5.4999227 L 30.000236 5.0002116 L 29.249894 5.0002116 z " />
+    <rect
+       style="fill:#000080;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       id="tegak"
+       width="1"
+       height="20"
+       x="-2.7755576e-17"
+       y="5" />
+    <circle
+       style="fill:#000080;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       id="titik"
+       cx="6"
+       cy="16"
+       r="1" />
+    <rect
+       style="fill:#000080;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       id="datar"
+       width="30"
+       height="1"
+       x="-2.7755576e-17"
+       y="24" />
+    <path
+       id="a"
+       style="fill:#000000;stroke:#333333;stroke-width:0.00185367;stroke-linejoin:round;paint-order:markers stroke fill"
+       d="M 0.0010335286 5.0007284 L 0.0010335286 23.999052 L 0.0010335286 24.998991 L 1.0009725 24.998991 L 29.999202 24.998991 L 29.999202 6.0006673 L 29.999202 5.0007284 L 28.999264 5.0007284 L 0.0010335286 5.0007284 z M 1.0009725 6.0006673 L 28.999264 6.0006673 L 28.999264 23.999052 L 1.0009725 23.999052 L 1.0009725 6.0006673 z " />
+    <path
+       id="b"
+       style="fill:#000000;stroke:#333333;stroke-width:0.00185367;stroke-linejoin:round;paint-order:markers stroke fill"
+       d="M 0.0010335286 5.0007284 L 0.0010335286 23.999052 L 0.0010335286 24.998991 L 1.0009725 24.998991 L 29.999202 24.998991 L 29.999202 6.0006673 L 29.999202 5.0007284 L 28.999264 5.0007284 L 0.0010335286 5.0007284 z M 1.0009725 6.0006673 L 28.999264 6.0006673 L 28.999264 23.999052 L 1.0009725 23.999052 L 1.0009725 6.0006673 z M 15.000118 13.501501 A 1.4984008 1.4984008 0 0 0 14.349512 13.649813 A 1.4984008 1.4984008 0 0 0 14.065808 13.828613 A 1.4984008 1.4984008 0 0 0 13.828613 14.065808 A 1.4984008 1.4984008 0 0 0 13.718542 14.239958 A 1.4984008 1.4984008 0 0 0 13.649813 14.349512 A 1.4984008 1.4984008 0 0 0 13.649813 14.350028 A 1.4984008 1.4984008 0 0 0 13.539225 14.666288 A 1.4984008 1.4984008 0 0 0 13.505636 14.962394 A 1.4984008 1.4984008 0 0 0 13.501501 14.999601 A 1.4984008 1.4984008 0 0 0 13.501501 15.000118 A 1.4984008 1.4984008 0 0 0 13.505636 15.037325 A 1.4984008 1.4984008 0 0 0 13.539225 15.333948 A 1.4984008 1.4984008 0 0 0 13.649813 15.650208 A 1.4984008 1.4984008 0 0 0 13.828613 15.934428 A 1.4984008 1.4984008 0 0 0 14.349512 16.349906 A 1.4984008 1.4984008 0 0 0 14.350028 16.349906 A 1.4984008 1.4984008 0 0 0 14.666288 16.461011 A 1.4984008 1.4984008 0 0 0 14.666805 16.461011 A 1.4984008 1.4984008 0 0 0 15.000118 16.498218 A 1.4984008 1.4984008 0 0 0 15.333431 16.461011 A 1.4984008 1.4984008 0 0 0 15.650208 16.349906 A 1.4984008 1.4984008 0 0 0 15.934428 16.171623 A 1.4984008 1.4984008 0 0 0 16.171623 15.934428 A 1.4984008 1.4984008 0 0 0 16.460494 15.335498 A 1.4984008 1.4984008 0 0 0 16.461011 15.332397 A 1.4984008 1.4984008 0 0 0 16.498735 15.000118 A 1.4984008 1.4984008 0 0 0 16.498735 14.999601 A 1.4984008 1.4984008 0 0 0 16.461011 14.667839 A 1.4984008 1.4984008 0 0 0 16.460494 14.664738 A 1.4984008 1.4984008 0 0 0 16.350423 14.350028 A 1.4984008 1.4984008 0 0 0 16.349906 14.349512 A 1.4984008 1.4984008 0 0 0 16.171623 14.065808 A 1.4984008 1.4984008 0 0 0 15.934428 13.828613 A 1.4984008 1.4984008 0 0 0 15.650208 13.649813 A 1.4984008 1.4984008 0 0 0 15.333431 13.539225 A 1.4984008 1.4984008 0 0 0 15.000118 13.501501 z " />
+    <path
+       id="c"
+       style="fill:#000000;stroke:#333333;stroke-width:0.00185367;stroke-linejoin:round;paint-order:markers stroke fill"
+       d="M 28.999264 5.0007284 L 28.999264 23.999052 L 0.0010335286 23.999052 L 0.0010335286 24.998991 L 29.999202 24.998991 L 29.999202 5.0007284 L 28.999264 5.0007284 z " />
+    <path
+       id="d"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 0 5.0002116 L 0 24.499797 L 0 25.000024 L 0.74982503 25.000024 L 0.99993896 25.000024 L 0.99993896 24.83311 L 30.000236 5.4999227 L 30.000236 5.0002116 L 29.249894 5.0002116 L 0.99993896 23.833171 L 0.99993896 5.0002116 L 0 5.0002116 z M 6.0001506 15.000118 A 1 1 0 0 0 5.0002116 16.000057 A 1 1 0 0 0 6.0001506 16.999996 A 1 1 0 0 0 7.0000895 16.000057 A 1 1 0 0 0 6.0001506 15.000118 z " />
+    <path
+       id="e"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 29.249894 5.0002116 L 0.74982503 24.000085 L 0 24.000085 L 0 24.499797 L 0 25.000024 L 0.74982503 25.000024 L 30.000236 25.000024 L 30.000236 24.000085 L 2.2499919 24.000085 L 30.000236 5.4999227 L 30.000236 5.0002116 L 29.249894 5.0002116 z " />
+    <path
+       id="f"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 14.750004,9.5 V 9.6669149 L 0,19.499906 v 0.999939 L 15.250232,10.333024 30.000236,20.166532 V 19.166593 L 15.75046,9.6669149 V 9.5 h -0.250114 -0.500228 z" />
+    <path
+       id="g"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 0.750342,5.0002116 29.250411,24.000085 h 0.749825 v 0.499712 0.500227 H 29.250411 0 V 24.000085 H 27.750244 L 0,5.4999227 V 5.0002116 Z" />
+    <path
+       id="h"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 30.000236,5.0002116 V 24.499797 25.000024 H 29.250411 29.000297 V 24.83311 L 0,5.4999227 V 5.0002116 H 0.750342 L 29.000297,23.833171 V 5.0002116 Z m -6.000151,9.9999064 a 1,1 0 0 1 0.999939,0.999939 1,1 0 0 1 -0.999939,0.999939 1,1 0 0 1 -0.999939,-0.999939 1,1 0 0 1 0.999939,-0.999939 z" />
+    <path
+       id="i"
+       style="fill:#000000;stroke:#333333;stroke-width:0.00185367;stroke-linejoin:round;paint-order:markers stroke fill"
+       d="M 1.0009715,5.0007284 V 23.999052 H 29.999202 v 0.999939 H 0.00103353 V 5.0007284 Z" />
+    <path
+       id="j"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 0 5.0002116 L 0 5.5004395 L 0 6.0001506 L 0.74982503 6.0001506 L 29.249894 25.000024 L 30.000236 25.000024 L 30.000236 24.500313 L 2.2499919 6.0001506 L 30.000236 6.0001506 L 30.000236 5.0002116 L 0.74982503 5.0002116 L 0 5.0002116 z M 24.000085 15.000118 A 1 1 0 0 0 23.000146 16.000057 A 1 1 0 0 0 24.000085 16.999996 A 1 1 0 0 0 25.000024 16.000057 A 1 1 0 0 0 24.000085 15.000118 z " />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 0,25.000024 V 5.5004386 5.0002116 h 0.749825 0.250114 v 0.166914 L 30.000236,24.500313 v 0.499711 H 29.249894 L 0.999939,6.1670646 V 25.000024 Z"
+       id="k" />
+    <path
+       id="l"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 5.2514372,0 H 3.751857 L 25.875056,14.749487 3,30.000236 H 4.4995802 L 27,14.999601 v -0.500228 z" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 0,5.0002116 V 24.499797 25.000024 H 0.74982503 0.99993896 V 24.83311 L 30.000236,5.4999227 V 5.0002116 H 29.249894 L 0.99993896,23.833171 V 5.0002116 Z"
+       id="m" />
+    <path
+       id="n"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 0,25.000024 V 24.499796 24.000085 H 0.74982503 L 29.249894,5.0002116 h 0.750342 v 0.499711 L 2.2499919,24.000085 H 30.000236 v 0.999939 H 0.74982503 Z m 24.000085,-9.999906 a 1,1 0 0 1 -0.999939,-0.999939 1,1 0 0 1 0.999939,-0.999939 1,1 0 0 1 0.999939,0.999939 1,1 0 0 1 -0.999939,0.999939 z" />
+    <path
+       id="o"
+       style="fill:#000000;stroke:#333333;stroke-width:0.00185367;stroke-linejoin:round;paint-order:markers stroke fill"
+       d="M 1.0009715,24.998991 V 6.0006674 H 29.999202 V 5.0007284 H 0.00103353 V 24.998991 Z" />
+    <path
+       id="p"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 30.000236,25.000024 V 5.5004386 5.0002116 h -0.749825 -0.250114 v 0.166914 L 0,24.500313 v 0.499711 H 0.750342 L 29.000297,6.1670646 V 25.000024 Z m -6.000151,-9.999906 a 1,1 0 0 0 0.999939,-0.999939 1,1 0 0 0 -0.999939,-0.999939 1,1 0 0 0 -0.999939,0.999939 1,1 0 0 0 0.999939,0.999939 z" />
+    <path
+       id="q"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 0.750342,25.000024 29.250411,6.0001506 h 0.749825 V 5.5004386 5.0002116 H 29.250411 0 v 0.999939 H 27.750244 L 0,24.500313 v 0.499711 z" />
+    <path
+       id="r"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 14.750004,20.499845 V 20.33293 L 0,10.499939 V 9.5 L 15.250232,19.666821 30.000236,9.833313 v 0.999939 L 15.75046,20.33293 v 0.166915 h -0.250114 -0.500228 z" />
+    <path
+       id="s"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 29.249894,25.000024 0.749825,6.0001506 H 0 v -0.499712 -0.500227 h 0.749825 29.250411 v 0.999939 H 2.249992 L 30.000236,24.500313 v 0.499711 z" />
+    <path
+       id="t"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 0,25.000024 V 5.5004386 5.0002116 h 0.749825 0.250114 v 0.166914 L 30.000236,24.500313 v 0.499711 H 29.249894 L 0.999939,6.1670646 V 25.000024 Z M 6.000151,15.000118 A 1,1 0 0 1 5.000212,14.000179 1,1 0 0 1 6.000151,13.00024 1,1 0 0 1 7.00009,14.000179 1,1 0 0 1 6.000151,15.000118 Z" />
+    <path
+       id="u"
+       style="fill:#000000;stroke:#333333;stroke-width:0.00185367;stroke-linejoin:round;paint-order:markers stroke fill"
+       d="M 28.999264,24.998991 V 6.0006674 H 0.00103353 V 5.0007284 H 29.999202 V 24.998991 Z" />
+    <path
+       id="v"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 30.000236,25.000024 V 24.499796 24.000085 H 29.250411 L 0.750342,5.0002116 H 0 v 0.499711 L 27.750244,24.000085 H 0 v 0.999939 H 29.250411 Z M 6.000151,15.000118 A 1,1 0 0 0 7.00009,14.000179 1,1 0 0 0 6.000151,13.00024 1,1 0 0 0 5.000212,14.000179 1,1 0 0 0 6.000151,15.000118 Z" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 30.000236,5.0002116 V 24.499797 25.000024 H 29.250411 29.000297 V 24.83311 L 0,5.4999227 V 5.0002116 H 0.750342 L 29.000297,23.833171 V 5.0002116 Z"
+       id="w" />
+    <path
+       id="x"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="m 24.748563,0 h 1.49958 L 4.124944,14.749487 27,30.000236 H 25.50042 L 3,14.999601 v -0.500228 z" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 30.000236,25.000024 V 5.5004386 5.0002116 h -0.749825 -0.250114 v 0.166914 L 0,24.500313 v 0.499711 H 0.750342 L 29.000297,6.1670646 V 25.000024 Z"
+       id="y" />
+    <path
+       id="z"
+       style="fill:#000000;stroke:none;stroke-width:0;stroke-linejoin:miter;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 30.000236,5.0002116 V 5.5004395 6.0001506 H 29.250411 L 0.750342,25.000024 H 0 V 24.500313 L 27.750244,6.0001506 H 0 V 5.0002116 H 29.250411 Z M 6.000151,15.000118 A 1,1 0 0 1 7.00009,16.000057 1,1 0 0 1 6.000151,16.999996 1,1 0 0 1 5.000212,16.000057 1,1 0 0 1 6.000151,15.000118 Z" />
+  </g>
+</svg>
