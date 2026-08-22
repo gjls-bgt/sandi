@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandi Kotak 2 - SVG Sprite</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Mobile Container (450x800) */
+        .phone-container {
+            width: 450px;
+            height: 800px;
+            background-color: #1e1e1e;
+            border: 4px solid #333;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        /* Header */
+        header {
+            background-color: #ff9f43;
+            color: #121212;
+            padding: 15px;
+            text-align: justify;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        header a {
+            text-decoration: none;
+            color: #121212;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            background-color: #2d2d2d;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 5px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: #ff9f43;
+            border-bottom: 3px solid #ff9f43;
+            font-weight: bold;
+        }
+
+        /* Content Area */
+        .content-section {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Scrollbar Customization */
+        .content-section::-webkit-scrollbar {
+            width: 6px;
+        }
+        .content-section::-webkit-scrollbar-thumb {
+            background-color: #444;
+            border-radius: 3px;
+        }
+
+        /* Typography */
+        h2 {
+            margin-bottom: 12px;
+            color: #ff9f43;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        /* Table Style - Kamus 4 Kolom */
+        .kotak-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            table-layout: fixed;
+        }
+
+        .kotak-table th, .kotak-table td {
+            border: 1px solid #333;
+            padding: 5px 2px;
+            text-align: center;
+            font-size: 0.85rem;
+            vertical-align: middle;
+        }
+
+        .kotak-table tr:nth-child(even) {
+            background-color: #252525;
+        }
+
+        /* Element SVG Icon - Background Putih Agar Garis Hitam Jelas */
+        .kotak-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #ffffff; /* Background putih kontras */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 2px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .kotak-icon use {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Converter Styles */
+        .conv-group {
+            background-color: #2d2d2d;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .conv-label {
+            font-size: 0.85rem;
+            color: #ff9f43;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .conv-input {
+            width: 100%;
+            background-color: #121212;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 6px;
+            resize: none;
+            font-family: inherit;
+        }
+
+        .conv-input:focus {
+            outline: none;
+            border-color: #ff9f43;
+        }
+
+        .conv-output-visual {
+            background-color: #222;
+            padding: 12px;
+            border-radius: 6px;
+            min-height: 65px;
+            margin-top: 8px;
+            border-left: 4px solid #00d2d3;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .conv-output-text {
+            background-color: #222;
+            padding: 12px;
+            border-radius: 6px;
+            height: auto;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.1rem;
+            color: #00d2d3;
+            font-weight: bold;
+            word-break: break-all;
+            margin-top: 8px;
+            border-left: 4px solid #00d2d3;
+        }
+
+        /* Spasi biasa antar kata */
+        .visual-space {
+            width: 16px;
+            height: 36px;
+            display: inline-block;
+        }
+
+        /* Visual Keyboard */
+        .visual-keyboard {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+            margin-top: 12px;
+            background-color: #121212;
+            padding: 4px;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .key-kotak-btn {
+            background-color: #3d3d3d;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .key-kotak-btn:active {
+            background-color: #555;
+        }
+
+        .key-kotak-btn .kotak-icon {
+            width: 30px;
+            height: 30px;
+            padding: 1px;
+        }
+
+        .keyboard-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .control-btn {
+            padding: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-space { background-color: #ff9f43; color: #121212; }
+        .btn-clear { background-color: #c0392b; }
+
+        /* Game Styles */
+        .level-selection {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .lvl-btn {
+            flex: 1;
+            padding: 8px;
+            background-color: #333;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .lvl-btn.active {
+            background-color: #ff9f43;
+            color: #121212;
+            font-weight: bold;
+            border-color: #ff9f43;
+        }
+
+        .game-card {
+            background-color: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .question-box-visual {
+            background-color: #222;
+            border-radius: 6px;
+            min-height: 90px;
+            margin: 20px 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px;
+            border: 1px dashed #444;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .option-btn {
+            background-color: #3d3d3d;
+            color: white;
+            border: 2px solid #555;
+            padding: 12px;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1rem;
+            height: 25px;
+        }
+
+        .correct { color: #1dd1a1; }
+        .wrong { color: #ff6b6b; }
+
+        .reset-btn {
+            margin-top: 20px;
+            background: none;
+            border: 1px solid #ff9f43;
+            color: #ff9f43;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <header><a href="index.html"> ◀ </a> SANDI KOTAK 2</header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('materi')">Materi</button>
+            <button class="tab-btn" onclick="switchTab('converter')">Alat Terjemah</button>
+            <button class="tab-btn" onclick="switchTab('game')">Kuis Game</button>
+        </div>
+
+        <!-- Tab 1: Materi -->
+        <div id="materi" class="content-section active">
+            <h2>Rumus:</h2>
+            <img src="kotak_2/rumus.jpg" alt="Rumus Sandi kotak 2" style="max-width: 60%; height: auto;">
+
+            <h2>Kamus Visual Sandi Kotak 2 (A-Z)</h2>
+            <table class="kotak-table">
+                <tbody id="table-kotak"></tbody>
+            </table>
+        </div>
+
+        <!-- Tab 2: Converter -->
+        <div id="converter" class="content-section">
+            <h2>Alat Terjemah Sandi Kotak 2</h2>
+            
+            <div class="conv-group">
+                <label class="conv-label">1. TEKS ➔ SANDI Kotak 2</label>
+                <textarea id="text-to-kotak-input" class="conv-input" rows="2" placeholder="Input teks..." oninput="handleTextToKotakVisual()"></textarea>
+                <div id="text-to-kotak-output-visual" class="conv-output-visual">
+                    <span style="color:#666; font-size:0.85rem;">Pratinjau visual muncul di sini...</span>
+                </div>
+            </div>
+
+            <div class="conv-group">
+                <label class="conv-label">2. SANDI Kotak 2 ➔ TEKS</label>
+                
+                <div id="kotak-keyboard-input-visual" class="conv-output-visual" style="border-left-color: #ff9f43; min-height: 70px; margin-bottom: 8px;">
+                    <span style="color:#666; font-size:0.85rem;">Ketuk simbol di bawah</span>
+                </div>
+
+                <div id="kotak-to-text-output" class="conv-output-text" style="margin-top: 0;">Output</div>
+                
+                <div id="keyboard-visual-container" class="visual-keyboard"></div>
+                
+                <div class="keyboard-controls">
+                    <button class="control-btn btn-space" onclick="pressKeyboardControl('space')">Spasi</button>
+                    <button class="control-btn btn-clear" onclick="pressKeyboardControl('clear')">Hapus Semua</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Game -->
+        <div id="game" class="content-section">
+            <div class="level-selection">
+                <button id="btn-lvl-huruf" class="lvl-btn active" onclick="changeLevel('huruf')">Level: Huruf</button>
+                <button id="btn-lvl-kata" class="lvl-btn" onclick="changeLevel('kata')">Level: Kata</button>
+            </div>
+
+            <div class="score-board">
+                <span>Skor: <b id="score">0</b></span>
+                <span>Soal: <b id="question-count">1</b>/10</span>
+            </div>
+            
+            <div class="game-card">
+                <p id="game-instruction">Tebak huruf/kata dari simbol berikut:</p>
+                <div class="question-box-visual" id="question-visual"></div>
+                <div class="options-container" id="options"></div>
+                <div class="feedback" id="feedback"></div>
+                <button class="reset-btn" onclick="resetGame()">Ulangi Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+        const wordBank = ["PRAMUKA", "SANDI", "TUNAS", "BUKIT", "KEMAH", "SINYAL", "PINTAR", "CEPAT", "LOGIKA", "REGU", "SIAGA", "PENGGALANG"];
+        const SPRITE_PATH = "kotak_2/sprite.svg";
+        
+        let inputSequence = [];
+
+        // Helper membuat elemen <svg> visual huruf
+        function createKotakSvgElement(letter) {
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("class", "kotak-icon");
+
+            const use = document.createElementNS(svgNS, "use");
+            use.setAttributeNS("http://www.w3.org/1999/xlink", "href", `${SPRITE_PATH}#${letter.toLowerCase()}`);
+            
+            svg.appendChild(use);
+            return svg;
+        }
+
+        // Helper membuat elemen spasi biasa
+        function createSpaceElement() {
+            const spaceDiv = document.createElement('div');
+            spaceDiv.className = 'visual-space';
+            return spaceDiv;
+        }
+
+        // Render Kamus Utama (Materi 4 Kolom: Huruf + Gambar x 4)
+        function renderKamusOtomatis() {
+            const tbody = document.getElementById('table-kotak');
+            tbody.innerHTML = '';
+            
+            // Loop per 4 huruf (kolom A, B, C, D per baris)
+            for (let i = 0; i < alphabet.length; i += 4) {
+                const tr = document.createElement('tr');
+                
+                for (let j = 0; j < 4; j++) {
+                    let charIndex = i + j;
+                    if (charIndex < alphabet.length) {
+                        let char = alphabet[charIndex];
+                        tr.innerHTML += `<td style="width:10%; font-weight:bold;">${char}</td>`;
+                        const tdImg = document.createElement('td');
+                        tdImg.style.width = "15%";
+                        tdImg.appendChild(createKotakSvgElement(char));
+                        tr.appendChild(tdImg);
+                    } else {
+                        // Sisa kolom kosong jika tidak genap 4
+                        tr.innerHTML += `<td></td><td></td>`;
+                    }
+                }
+                tbody.appendChild(tr);
+            }
+        }
+
+        // Render Keyboard Visual
+        function renderKeyboardVisual() {
+            const keyboardContainer = document.getElementById('keyboard-visual-container');
+            keyboardContainer.innerHTML = '';
+            alphabet.forEach(letter => {
+                const btn = document.createElement('button');
+                btn.className = 'key-kotak-btn';
+                btn.onclick = () => pressKotakKey(letter);
+                btn.appendChild(createKotakSvgElement(letter));
+                keyboardContainer.appendChild(btn);
+            });
+        }
+
+        renderKamusOtomatis();
+        renderKeyboardVisual();
+
+        // Switch Tab
+        function switchTab(tabId) {
+            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            if(tabId === 'game' && currentQuestionIndex === 0) {
+                nextQuestion();
+            }
+        }
+
+        /* ---------------- LOGIKA CONVERTER VISUAL ---------------- */
+        function handleTextToKotakVisual() {
+            const inputText = document.getElementById('text-to-kotak-input').value;
+            const outputVisualBox = document.getElementById('text-to-kotak-output-visual');
+            outputVisualBox.innerHTML = '';
+
+            if (!inputText.trim()) {
+                outputVisualBox.innerHTML = '<span style="color:#666; font-size:0.85rem;">Pratinjau visual muncul di sini...</span>';
+                return;
+            }
+
+            let characters = inputText.toUpperCase().split('');
+            characters.forEach((char) => {
+                if (alphabet.includes(char)) {
+                    outputVisualBox.appendChild(createKotakSvgElement(char));
+                } else if (char === ' ') {
+                    outputVisualBox.appendChild(createSpaceElement());
+                }
+            });
+        }
+
+        function pressKotakKey(letter) {
+            inputSequence.push(letter);
+            renderConverterInputAndOutput();
+        }
+
+        function pressKeyboardControl(type) {
+            if (type === 'space') {
+                if (inputSequence.length > 0 && inputSequence[inputSequence.length - 1] !== ' ') {
+                    inputSequence.push(' ');
+                }
+            } else if (type === 'clear') {
+                inputSequence = [];
+            }
+            renderConverterInputAndOutput();
+        }
+
+        function renderConverterInputAndOutput() {
+            const inputVisualBox = document.getElementById('kotak-keyboard-input-visual');
+            const outputTextBox = document.getElementById('kotak-to-text-output');
+            
+            inputVisualBox.innerHTML = '';
+            
+            if (inputSequence.length === 0) {
+                inputVisualBox.innerHTML = '<span style="color:#666; font-size:0.85rem;">Ketuk simbol di bawah</span>';
+                outputTextBox.innerText = "Output";
+                return;
+            }
+
+            inputSequence.forEach((item) => {
+                if (item === ' ') {
+                    inputVisualBox.appendChild(createSpaceElement());
+                } else {
+                    inputVisualBox.appendChild(createKotakSvgElement(item));
+                }
+            });
+
+            let textResult = inputSequence.join('');
+            outputTextBox.innerText = textResult;
+        }
+
+        /* ---------------- LOGIKA GAME QUIZ VISUAL ---------------- */
+        let currentLevel = 'huruf';
+        let score = 0;
+        let currentQuestionIndex = 0;
+        let correctAnswer = '';
+        const totalQuestions = 10;
+
+        function changeLevel(level) {
+            currentLevel = level;
+            document.getElementById('btn-lvl-huruf').classList.toggle('active', level === 'huruf');
+            document.getElementById('btn-lvl-kata').classList.toggle('active', level === 'kata');
+            resetGame();
+        }
+
+        function nextQuestion() {
+            const questionBox = document.getElementById('question-visual');
+            questionBox.innerHTML = '';
+
+            if (currentQuestionIndex >= totalQuestions) {
+                document.getElementById('game-instruction').innerText = `Permainan Berakhir.`;
+                questionBox.style.color = "#1dd1a1";
+                questionBox.innerText = `Skor akhir kamu: ${score}`;
+                document.getElementById('options').innerHTML = '';
+                document.getElementById('feedback').innerText = '';
+                return;
+            }
+
+            currentQuestionIndex++;
+            document.getElementById('question-count').innerText = currentQuestionIndex;
+            document.getElementById('feedback').innerText = '';
+
+            let options = [];
+
+            if (currentLevel === 'huruf') {
+                document.getElementById('game-instruction').innerText = "Tebak HURUF dari simbol berikut:";
+                correctAnswer = alphabet[Math.floor(Math.random() * alphabet.length)];
+                questionBox.appendChild(createKotakSvgElement(correctAnswer));
+                
+                options = [correctAnswer];
+                while (options.length < 4) {
+                    let rand = alphabet[Math.floor(Math.random() * alphabet.length)];
+                    if (!options.includes(rand)) options.push(rand);
+                }
+            } else {
+                document.getElementById('game-instruction').innerText = "Tebak KATA dari simbol berikut:";
+                correctAnswer = wordBank[Math.floor(Math.random() * wordBank.length)];
+                
+                correctAnswer.split('').forEach((char) => {
+                    questionBox.appendChild(createKotakSvgElement(char));
+                });
+                
+                options = [correctAnswer];
+                while (options.length < 4) {
+                    let rand = wordBank[Math.floor(Math.random() * wordBank.length)];
+                    if (!options.includes(rand)) options.push(rand);
+                }
+            }
+
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected) {
+            const feedback = document.getElementById('feedback');
+            document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+
+            if (selected === correctAnswer) {
+                score += 10;
+                document.getElementById('score').innerText = score;
+                feedback.innerText = "Benar! 🎉";
+                feedback.className = "feedback correct";
+            } else {
+                feedback.innerText = `Salah! Jawaban: ${correctAnswer}`;
+                feedback.className = "feedback wrong";
+            }
+
+            setTimeout(() => {
+                nextQuestion();
+            }, 1600);
+        }
+
+        function resetGame() {
+            score = 0;
+            currentQuestionIndex = 0;
+            document.getElementById('score').innerText = score;
+            nextQuestion();
+        }
+
+        // Fitur Pengaman
+        (function() {
+            window.addEventListener('contextmenu', e => { e.preventDefault(); e.stopPropagation(); }, true);
+            window.addEventListener('keydown', function(e) {
+                if (e.key === 'F12') { e.preventDefault(); e.stopPropagation(); }
+                if (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) { e.preventDefault(); e.stopPropagation(); }
+                if (e.ctrlKey && ['U', 'S', 'A', 'C'].includes(e.key.toUpperCase())) { e.preventDefault(); e.stopPropagation(); }
+            }, true);
+        })();
+    </script>
+</body>
+</html>
